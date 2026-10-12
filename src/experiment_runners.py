@@ -27,6 +27,7 @@ def run_phase_a():
     clusters = phase.cluster_analysis(results)
     path = Path(ARTIFACTS_DIR) / "ragas_50q.json"
     report = phase.build_phase_a_report(results, clusters, bottom)
+    report["evaluator_details"] = evaluation.evaluator_details
     report["metadata"] = metadata([ANSWERS_PATH, TEST_SET_PATH], models={
         "generation": generation_models(answers), "evaluator": evaluator_models,
         "judge": [], "guard": []})

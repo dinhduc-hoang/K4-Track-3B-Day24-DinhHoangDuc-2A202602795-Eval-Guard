@@ -7,7 +7,7 @@ import math
 import os
 import re
 import sys
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import TEST_SET_PATH, ANSWERS_PATH, ARTIFACTS_DIR
@@ -61,6 +61,7 @@ class RagasEvaluation:
     """Task 2 output: measured rows plus model identifiers reported by m4."""
     results: list[RagasResult]
     evaluator_models: list[str]
+    evaluator_details: dict = field(default_factory=dict)
 
 def load_test_set_50q(path: str = TEST_SET_PATH) -> list[dict]:
     """Load 50q test set với 3 distributions."""
@@ -169,7 +170,7 @@ def run_ragas_50q(answers: list[dict]) -> RagasEvaluation:
             contexts=a["contexts"], ground_truth=a["ground_truth"],
             **scores,
         ))
-    return RagasEvaluation(results, list(evaluator_models))
+    return RagasEvaluation(results, list(evaluator_models), dict(raw["metadata"]))
 
 
 def _metric_value(record, metric: str, question_id) -> float:
@@ -235,8 +236,9 @@ def diagnose(r: RagasResult) -> tuple[str, str]:
         notes.append("không có context nào được truy hồi")
         fixes.append("kiểm tra index/search trả kết quả cho câu này")
     if _ABSTAIN_RE.search(r.answer):
-        notes.append("pipeline trả 'Không tìm thấy' — contexts top-k không chứa ý cần trả lời")
-        fixes.append("tăng top-k trước rerank, kiểm tra chunk chứa đáp án có được index")
+        notes.append("pipeline trả 'Không tìm thấy' — cần đọc contexts để phân biệt thiếu retrieval và lỗi tổng hợp")
+        fixes.append("đối chiếu điều khoản trong contexts; nếu đã đủ thì sửa generation/ghép chunk, "
+                     "nếu còn thiếu thì kiểm tra index và tăng top-k trước rerank")
 
     ref_versions = _versions(r.ground_truth)
     if len(ref_versions) >= 2:

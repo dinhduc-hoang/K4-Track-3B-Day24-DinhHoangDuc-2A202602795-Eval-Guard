@@ -31,6 +31,8 @@ Mỗi report có `metadata`: format_version=2, run_kind=live, `models`, created_
 mỗi key là list model IDs đã sắp xếp, không trùng, `[]` khi vai trò đó không
 tham gia phase. Checker so hash để phát hiện
 report cũ khi dữ liệu đầu vào đã đổi; hash không tự chứng minh đã gọi API.
+`.gitattributes` cố định JSON artifact ở LF và fixtures ở CRLF đúng với bytes
+đã dùng trong các lần chạy lưu bằng chứng, để checkout Windows/Linux giữ SHA-256.
 
 - Generation: lấy từ `generation_model` của các answers có mode `llm`. Mỗi answer
   bắt buộc có `generation_mode` thuộc `llm`/`extractive_fallback` và
@@ -60,6 +62,26 @@ Phase A exporter nhận trực tiếp `bottom_10(results)`. Diagnosis/suggested_
 do học viên viết được giữ nguyên, không bị exporter tự tính lại thành mặc định.
 Matrix vẫn thống kê worst_metric của mọi câu; nhóm yếu nhất được chọn bằng
 avg_score trung bình thấp nhất, không bằng tổng 20/20/10.
+
+Adapter m4 lưu checkpoint theo hash của question/answer/contexts/reference và
+model evaluator. Khi đã xác nhận primary hết quota, `RAGAS_SKIP_PRIMARY=true`
+giữ các ô primary đã đo và chỉ gọi evaluator dự phòng cho các ô thiếu;
+`RAGAS_FALLBACK_EVALUATOR_MODEL` khai báo model đó. Không điền điểm thay API.
+`RAGAS_BATCH_SIZE=1` ghi checkpoint sau từng câu để giảm mất kết quả khi ngắt.
+Nếu nhiều evaluator hết quota, `RAGAS_ADDITIONAL_FALLBACK_MODELS` khai báo thêm
+model theo thứ tự cố định; `RAGAS_CHECKPOINT_ONLY_MODELS` giữ điểm của các model
+đã hết quota mà không gọi lại. Chỉ chấm ô chưa có điểm từ bất kỳ checkpoint nào;
+không chọn model theo điểm cao/thấp. Metadata chỉ liệt kê model có đóng góp vào
+điểm được chọn và embedding; từng ô dự phòng giữ model thực tế của nó.
+Phase A có thêm `evaluator_details` từ metadata m4: provider, trạng thái
+primary checkpoint-only và `fallback_cells` với index theo thứ tự `per_question`,
+metric, model, score. Báo cáo phải ghi giới hạn của việc dùng evaluator khác nhau.
+Các ô faithfulness có thêm `protocol`: mặc định RAGAS 0.1.22, hoặc
+`ragas_0.1.22_retain_fragments_v1` cho adapter giữ nguyên các đoạn không có dấu chấm
+khi bộ lọc mặc định làm danh sách trống. Score vẫn do RAGAS/LLM đo; các ô checkpoint
+đã có điểm được giữ nguyên và không tự đổi nhãn protocol.
+Đối chiếu lại artifacts offline bằng `python scripts/audit_evidence.py`;
+`artifacts/evidence_audit.json` chứa summary và hash nguồn, không phải số đo API mới.
 
 Phase B: mỗi binary_judgment giữ question_id, question, **model_answer gốc**,
 label và reasoning; calibration giữ cùng thứ tự ids, judge_labels, human_labels,

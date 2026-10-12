@@ -14,14 +14,14 @@ from config import EMBEDDING_MODEL, OPENAI_API_KEY, ROOT_DIR, TEST_SET_PATH
 
 # The evaluator model is kept separate from GENERATION_MODEL/JUDGE_MODEL so Phase A
 # metadata names what RAGAS actually called. Requests go to Groq via config.py env routing.
-# Groq free tier caps each model at 200K tokens/day; generation + Phase B/C had already used
-# gpt-oss-20b's quota, and RAGAS on 50 questions needs ~300-450K tokens. Qwen has its own
-# daily quota and answers without reasoning tokens, so it is the evaluator here.
+# Quota is model-specific; the primary evaluator has a separate budget from generation.
 EVALUATOR_LLM_MODEL = os.getenv("RAGAS_EVALUATOR_MODEL", "qwen/qwen3.8-27b")
 # Cells that stay NaN after the primary retries (e.g. faithfulness of a fragment answer such
 # as "1 tháng lương", from which the primary model extracts no statements) are measured by a
 # second, declared evaluator instead of being left NaN or filled with an invented score.
 FALLBACK_EVALUATOR_LLM_MODEL = os.getenv("RAGAS_FALLBACK_EVALUATOR_MODEL", "openai/gpt-oss-120b")
+ADDITIONAL_FALLBACK_EVALUATOR_MODELS = [s.strip() for s in os.getenv("RAGAS_ADDITIONAL_FALLBACK_MODELS", "").split(',') if s.strip()]
+CHECKPOINT_ONLY_MODELS = {s.strip() for s in os.getenv("RAGAS_CHECKPOINT_ONLY_MODELS", "").split(',') if s.strip()}
 # Evaluator endpoint. With OPENROUTER_API_KEY set, only the RAGAS evaluator goes to OpenRouter
 # (same model IDs, own quota); generation/judge/guard keep the Groq routing from config.py.
 # Groq free tier allows 200K tokens/day per model, which ran out after 18 of 50 questions.
@@ -38,6 +38,8 @@ RAGAS_MAX_TOKENS = int(os.getenv("RAGAS_MAX_TOKENS", "2048"))
 RAGAS_CACHE_PATH = os.getenv("RAGAS_CACHE_PATH", os.path.join(ROOT_DIR, ".cache", "ragas_rows.json"))
 METRIC_NAMES = ("faithfulness", "answer_relevancy", "context_precision", "context_recall")
 NAN_RETRY_ROUNDS = 2
+# Resume a quota-exhausted primary using its measured checkpoint and the declared fallback.
+RAGAS_SKIP_PRIMARY = os.getenv("RAGAS_SKIP_PRIMARY", "false").lower() in ("1", "true", "yes")
 
 
 @dataclass
@@ -73,31 +75,51 @@ def evaluate_ragas(questions: list[str], answers: list[str],
     inputs = (questions, answers, contexts, ground_truths)
     n = len(questions)
     cache = _load_cache()
-    primary_keys = [_row_key(*row, EVALUATOR_LLM_MODEL) for row in zip(*inputs)]
-    _fill_cells(inputs, primary_keys, set(range(n)), cache, EVALUATOR_LLM_MODEL,
-                rounds=1 + NAN_RETRY_ROUNDS, label="RAGAS")
+    models = list(dict.fromkeys([EVALUATOR_LLM_MODEL, FALLBACK_EVALUATOR_LLM_MODEL, *ADDITIONAL_FALLBACK_EVALUATOR_MODELS]))
+    keys = {model: [_row_key(*row, model) for row in zip(*inputs)] for model in models}
+    primary_keys = keys[EVALUATOR_LLM_MODEL]
 
-    # Cells the primary evaluator still could not score go to the declared fallback model.
-    primary_missing = {i for i in range(n) if _missing(cache, primary_keys[i])}
-    fallback_keys = [_row_key(*row, FALLBACK_EVALUATOR_LLM_MODEL) for row in zip(*inputs)]
-    fallback_cells: list[dict] = []
-    if primary_missing:
-        _fill_cells(inputs, fallback_keys, primary_missing, cache, FALLBACK_EVALUATOR_LLM_MODEL,
-                    rounds=1 + NAN_RETRY_ROUNDS, label=f"RAGAS fallback {FALLBACK_EVALUATOR_LLM_MODEL}",
-                    only=lambda i: _missing(cache, primary_keys[i]))
+    def unmeasured(i):
+        return [metric for metric in METRIC_NAMES if not any(
+            _is_score(cache.get(keys[model][i], {}).get(metric)) for model in models)]
+
+    if RAGAS_SKIP_PRIMARY or EVALUATOR_LLM_MODEL in CHECKPOINT_ONLY_MODELS:
+        print(f"  primary {EVALUATOR_LLM_MODEL}: checkpoint only (RAGAS_SKIP_PRIMARY)", flush=True)
+    else:
+        pending = {i for i in range(n) if unmeasured(i)}
+        if pending:
+            _fill_cells(inputs, primary_keys, pending, cache, EVALUATOR_LLM_MODEL,
+                        rounds=1 + NAN_RETRY_ROUNDS, label="RAGAS", only=unmeasured)
+
+    # Fixed model order; retain measured values, never choose a model by its score.
+    for model in models[1:]:
+        pending = {i for i in range(n) if unmeasured(i)}
+        if not pending:
+            break
+        if model in CHECKPOINT_ONLY_MODELS:
+            print(f"  fallback {model}: checkpoint only", flush=True)
+            continue
+        _fill_cells(inputs, keys[model], pending, cache, model,
+                    rounds=1 + NAN_RETRY_ROUNDS, label=f"RAGAS fallback {model}", only=unmeasured)
 
     rows = []
+    fallback_cells: list[dict] = []
+    used_models = {EMBEDDING_MODEL}
     for i in range(n):
-        primary = cache.get(primary_keys[i], {})
-        fallback = cache.get(fallback_keys[i], {})
         row = {}
         for m in METRIC_NAMES:
-            if _is_score(primary.get(m)):
-                row[m] = primary[m]
-            else:
-                row[m] = fallback.get(m, math.nan)
-                fallback_cells.append({"index": i, "metric": m, "model": FALLBACK_EVALUATOR_LLM_MODEL,
-                                       "score": row[m]})
+            row[m] = math.nan
+            for model in models:
+                entry = cache.get(keys[model][i], {})
+                if not _is_score(entry.get(m)):
+                    continue
+                row[m] = entry[m]
+                used_models.add(model)
+                if model != EVALUATOR_LLM_MODEL:
+                    fallback_cells.append({"index": i, "metric": m, "model": model, "score": row[m],
+                                           "protocol": entry.get('__faithfulness_protocol', 'ragas_0.1.22_default')
+                                           if m == 'faithfulness' else 'ragas_0.1.22_default'})
+                break
         rows.append(row)
     for cell in fallback_cells:
         print(f"  fallback cell: row {cell['index']} {cell['metric']}={cell['score']} "
@@ -108,13 +130,14 @@ def evaluate_ragas(questions: list[str], answers: list[str],
                    **{name: row[name] for name in METRIC_NAMES})
         for q, a, c, g, row in zip(questions, answers, contexts, ground_truths, rows)
     ]
-    evaluator_models = [EVALUATOR_LLM_MODEL, EMBEDDING_MODEL]
-    if fallback_cells:
-        evaluator_models.insert(1, FALLBACK_EVALUATOR_LLM_MODEL)
+    evaluator_models = sorted(used_models)
     return {
         **{name: _finite_mean([row[name] for row in rows]) for name in METRIC_NAMES},
         "per_question": per_question,
-        "metadata": {"evaluator_models": evaluator_models, "fallback_cells": fallback_cells},
+        "metadata": {"evaluator_models": evaluator_models, "fallback_cells": fallback_cells,
+                     "primary_checkpoint_only": RAGAS_SKIP_PRIMARY or EVALUATOR_LLM_MODEL in CHECKPOINT_ONLY_MODELS,
+                     "checkpoint_only_models": sorted(CHECKPOINT_ONLY_MODELS),
+                     "provider": RAGAS_EVALUATOR_PROVIDER},
     }
 
 
@@ -158,8 +181,10 @@ def _fill_cells(inputs, keys, rows_in_scope, cache, model, *, rounds, label, onl
             for i, row in zip(batch, measured):
                 entry = cache.setdefault(keys[i], {})
                 for name, value in row.items():
-                    if _is_score(value) and not _is_score(entry.get(name)):
+                    if name in METRIC_NAMES and _is_score(value) and not _is_score(entry.get(name)):
                         entry[name] = value
+                        if name == 'faithfulness' and '__faithfulness_protocol' in row:
+                            entry['__faithfulness_protocol'] = row['__faithfulness_protocol']
             _save_cache(cache)
             done = sum(1 for i in rows_in_scope if not missing(i))
             print(f"  checkpoint: {done}/{len(rows_in_scope)} rows complete", flush=True)
@@ -169,7 +194,19 @@ def _evaluate_rows(questions, answers, contexts, ground_truths, provider,
                    metric_names=METRIC_NAMES) -> list[dict]:
     from datasets import Dataset
     from ragas import RunConfig, evaluate
-    from ragas.metrics import answer_relevancy, context_precision, context_recall, faithfulness
+    from ragas.metrics import answer_relevancy, context_precision, context_recall
+    from ragas.metrics._faithfulness import Faithfulness
+
+    class FragmentAwareFaithfulness(Faithfulness):
+        def _create_statements_prompt(self, row):
+            # RAGAS 0.1.22 drops every segment not ending in a period. Vietnamese
+            # answers such as "Bí mật" are still claims; pass the original segment
+            # to the evaluator instead of rewriting the answer or assigning a score.
+            sentences = _statement_sentences(row['answer'], self.sentence_segmenter)
+            return self.statement_prompt.format(question=row['question'], answer=row['answer'],
+                                                sentences='\n'.join(f'{i}:{s}' for i, s in enumerate(sentences)))
+
+    faithfulness = FragmentAwareFaithfulness()
 
     # Groq accepts one completion per request (n=1); RAGAS defaults to 3 generated
     # questions for answer_relevancy, so lower strictness to 1 (as in Day 18).
@@ -196,9 +233,18 @@ def _evaluate_rows(questions, answers, contexts, ground_truths, provider,
     dataframe = evaluation.to_pandas()
     if len(dataframe) != len(questions):
         raise ValueError(f"RAGAS returned {len(dataframe)} rows for {len(questions)} questions")
-    return [{name: float(row[name]) if row.get(name) is not None else math.nan
-             for name in metric_names}
-            for _, row in dataframe.iterrows()]
+    rows = [{name: float(row[name]) if row.get(name) is not None else math.nan
+             for name in metric_names} for _, row in dataframe.iterrows()]
+    if 'faithfulness' in metric_names:
+        for row in rows:
+            row['__faithfulness_protocol'] = 'ragas_0.1.22_retain_fragments_v1'
+    return rows
+
+
+def _statement_sentences(answer, segmenter):
+    segments = segmenter.segment(answer)
+    complete = [s for s in segments if s.strip().endswith('.')]
+    return complete or [s for s in segments if s.strip()] or ([answer] if answer.strip() else [])
 
 
 def _is_score(value) -> bool:

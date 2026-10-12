@@ -165,6 +165,7 @@ def test_phase_a_runner_keeps_actual_evaluator_models(phase_a_data, monkeypatch,
     monkeypatch.setattr(phase, "bottom_10", lambda rows: bottom)
     monkeypatch.setattr(phase, "cluster_analysis", lambda rows: clusters)
     actual = runners.run_phase_a()
+    assert actual['evaluator_details'] == {}
     assert actual["metadata"]["models"] == report["metadata"]["models"]
     assert "model" not in actual["metadata"]
     assert (tmp_path / "artifacts/ragas_50q.json").is_file()

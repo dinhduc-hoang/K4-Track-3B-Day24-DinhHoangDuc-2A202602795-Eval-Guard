@@ -1,0 +1,4 @@
+# Experiment provenance hashes depend on exact JSON bytes across Windows/Linux.
+*.json text eol=lf
+# The supplied fixtures were evaluated as CRLF; preserve those bytes on checkout.
+fixtures/*.json text eol=crlf

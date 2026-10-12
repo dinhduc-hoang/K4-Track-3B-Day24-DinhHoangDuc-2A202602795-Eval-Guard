@@ -6,7 +6,7 @@ from unittest.mock import Mock
 import pytest
 
 from src.phase_a_ragas import (load_test_set_50q, group_by_distribution, run_ragas_50q,
-                               bottom_10, cluster_analysis, RagasResult)
+                               bottom_10, cluster_analysis, diagnose, RagasResult)
 
 pytestmark = pytest.mark.student
 
@@ -82,3 +82,13 @@ def test_weakest_distribution_is_quality_not_size():
             results.append(RagasResult(len(results)+1,dist,"Q","A",["C"],"GT",
                                        value,value,value,value))
     assert cluster_analysis(results)["dominant_failure_distribution"] == "adversarial"
+
+
+def test_abstention_does_not_assert_missing_retrieval_without_reading_contexts():
+    row = RagasResult(23, 'multi_hop', 'Hoàn trả bao nhiêu?', 'Không tìm thấy.',
+                      ['Cam kết 1 năm; nghỉ trước hạn hoàn trả 100% chi phí.'],
+                      'Hoàn trả toàn bộ chi phí.', 0, 0, 1, 1)
+    diagnosis, fix = diagnose(row)
+    assert 'contexts top-k không chứa' not in diagnosis
+    assert 'thiếu retrieval và lỗi tổng hợp' in diagnosis
+    assert 'generation/ghép chunk' in fix
