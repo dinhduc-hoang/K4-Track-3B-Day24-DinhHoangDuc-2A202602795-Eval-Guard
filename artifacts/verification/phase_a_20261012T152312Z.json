@@ -1,0 +1,9 @@
+{
+  "started_at": "20261012T152312Z",
+  "finished_at": "2026-10-12T15:32:50.778015+00:00",
+  "command": "python scripts/run_experiments.py --phase a --live",
+  "provider": "groq",
+  "endpoint": "https://api.groq.com/openai/v1",
+  "exit_code": -15,
+  "log": "phase_a_20261012T152312Z.log"
+}

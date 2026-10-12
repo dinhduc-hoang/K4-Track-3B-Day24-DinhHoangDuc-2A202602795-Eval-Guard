@@ -1,0 +1,179 @@
+  primary qwen/qwen3.8-27b: checkpoint only (RAGAS_SKIP_PRIMARY)
+/mnt/e/AIVin/K4-Track-3B-Day24-DinhHoangDuc-2A202602795-Eval-Guard/src/m4_eval.py:381: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the langchain-huggingface package and should be used instead. To use it run `pip install -U langchain-huggingface` and import as `from langchain_huggingface import HuggingFaceEmbeddings`.
+  _EMBEDDINGS = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 9857.26it/s]
+  evaluator openai/gpt-oss-120b via groq (workers=1)
+  RAGAS fallback openai/gpt-oss-120b: 6 rows to evaluate (0 already measured/cached)
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:02<00:06,  2.16s/it]
+Evaluating:  50%|█████     | 2/4 [00:03<00:03,  1.65s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:05<00:01,  1.75s/it]
+Evaluating: 100%|██████████| 4/4 [00:10<00:00,  3.16s/it]
+Evaluating: 100%|██████████| 4/4 [00:10<00:00,  2.66s/it]
+  checkpoint: 1/6 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:26<01:19, 26.39s/it]
+Evaluating:  50%|█████     | 2/4 [00:34<00:31, 15.78s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:49<00:15, 15.29s/it]
+Evaluating: 100%|██████████| 4/4 [01:10<00:00, 17.48s/it]
+Evaluating: 100%|██████████| 4/4 [01:10<00:00, 17.57s/it]
+  checkpoint: 2/6 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:08<00:26,  8.83s/it]
+Evaluating:  50%|█████     | 2/4 [00:34<00:37, 18.83s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:50<00:17, 17.28s/it]
+Evaluating: 100%|██████████| 4/4 [01:05<00:00, 16.58s/it]
+Evaluating: 100%|██████████| 4/4 [01:05<00:00, 16.40s/it]
+  checkpoint: 3/6 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:09<00:29,  9.99s/it]
+Evaluating:  50%|█████     | 2/4 [00:23<00:24, 12.24s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:48<00:18, 18.12s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 15.60s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 15.17s/it]
+  checkpoint: 4/6 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:24<01:14, 24.91s/it]
+Evaluating:  50%|█████     | 2/4 [00:49<00:49, 24.94s/it]
+Evaluating:  75%|███████▌  | 3/4 [01:03<00:19, 19.79s/it]
+Evaluating: 100%|██████████| 4/4 [01:14<00:00, 16.17s/it]
+Evaluating: 100%|██████████| 4/4 [01:14<00:00, 18.54s/it]
+  checkpoint: 5/6 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:17<00:52, 17.47s/it]
+Evaluating:  50%|█████     | 2/4 [00:37<00:37, 18.91s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:50<00:16, 16.13s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 13.82s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 15.12s/it]
+  checkpoint: 6/6 rows complete
+  fallback cell: row 5 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 11 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 20 faithfulness=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 20 answer_relevancy=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 20 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 20 context_recall=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 21 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 21 answer_relevancy=0.7961693914740371 (openai/gpt-oss-120b)
+  fallback cell: row 21 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 21 context_recall=0.3333333333333333 (openai/gpt-oss-120b)
+  fallback cell: row 22 faithfulness=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 22 answer_relevancy=0.5869695561355802 (openai/gpt-oss-120b)
+  fallback cell: row 22 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 22 context_recall=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 23 faithfulness=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 23 answer_relevancy=0.7264339501274925 (openai/gpt-oss-120b)
+  fallback cell: row 23 context_precision=0.9999999999666667 (openai/gpt-oss-120b)
+  fallback cell: row 23 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 24 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 24 answer_relevancy=0.5919665226807297 (openai/gpt-oss-120b)
+  fallback cell: row 24 context_precision=0.3333333333 (openai/gpt-oss-120b)
+  fallback cell: row 24 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 25 faithfulness=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 25 answer_relevancy=0.8495943194221421 (openai/gpt-oss-120b)
+  fallback cell: row 25 context_precision=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 25 context_recall=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 26 faithfulness=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 26 answer_relevancy=0.7499496593909276 (openai/gpt-oss-120b)
+  fallback cell: row 26 context_precision=0.5833333333041666 (openai/gpt-oss-120b)
+  fallback cell: row 26 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 27 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 27 answer_relevancy=0.9128978432578374 (openai/gpt-oss-120b)
+  fallback cell: row 27 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 27 context_recall=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 28 faithfulness=0.3333333333333333 (openai/gpt-oss-120b)
+  fallback cell: row 28 answer_relevancy=0.7495335428664598 (openai/gpt-oss-120b)
+  fallback cell: row 28 context_precision=0.9999999999666667 (openai/gpt-oss-120b)
+  fallback cell: row 28 context_recall=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 29 faithfulness=0.6 (openai/gpt-oss-120b)
+  fallback cell: row 29 answer_relevancy=0.749536721012212 (openai/gpt-oss-120b)
+  fallback cell: row 29 context_precision=0.8333333332916666 (openai/gpt-oss-120b)
+  fallback cell: row 29 context_recall=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 30 faithfulness=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 30 answer_relevancy=0.7873661920167137 (openai/gpt-oss-120b)
+  fallback cell: row 30 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 30 context_recall=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 31 faithfulness=0.5555555555555556 (openai/gpt-oss-120b)
+  fallback cell: row 31 answer_relevancy=0.809431744552411 (openai/gpt-oss-120b)
+  fallback cell: row 31 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 31 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 32 faithfulness=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 32 answer_relevancy=0.31990023561879904 (openai/gpt-oss-120b)
+  fallback cell: row 32 context_precision=0.49999999995 (openai/gpt-oss-120b)
+  fallback cell: row 32 context_recall=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 33 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 33 answer_relevancy=0.7196195751597871 (openai/gpt-oss-120b)
+  fallback cell: row 33 context_precision=0.49999999995 (openai/gpt-oss-120b)
+  fallback cell: row 33 context_recall=0.3333333333333333 (openai/gpt-oss-120b)
+  fallback cell: row 34 faithfulness=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 34 answer_relevancy=0.646699463306331 (openai/gpt-oss-120b)
+  fallback cell: row 34 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 34 context_recall=0.25 (openai/gpt-oss-120b)
+  fallback cell: row 35 faithfulness=0.75 (openai/gpt-oss-120b)
+  fallback cell: row 35 answer_relevancy=0.81499811980337 (openai/gpt-oss-120b)
+  fallback cell: row 35 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 35 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 36 faithfulness=0.7142857142857143 (openai/gpt-oss-120b)
+  fallback cell: row 36 answer_relevancy=0.6923348869307955 (openai/gpt-oss-120b)
+  fallback cell: row 36 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 36 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 37 faithfulness=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 37 answer_relevancy=0.7986083299200581 (openai/gpt-oss-120b)
+  fallback cell: row 37 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 37 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 38 faithfulness=0.16666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 38 answer_relevancy=0.8102769467468527 (openai/gpt-oss-120b)
+  fallback cell: row 38 context_precision=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 38 context_recall=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 39 faithfulness=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 39 answer_relevancy=0.6264547559503771 (openai/gpt-oss-120b)
+  fallback cell: row 39 context_precision=0.3333333333 (openai/gpt-oss-120b)
+  fallback cell: row 39 context_recall=0.3333333333333333 (openai/gpt-oss-120b)
+  fallback cell: row 40 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 40 answer_relevancy=0.7213389998489229 (openai/gpt-oss-120b)
+  fallback cell: row 40 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 40 context_recall=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 41 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 41 answer_relevancy=0.6905121294771374 (openai/gpt-oss-120b)
+  fallback cell: row 41 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 41 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 42 faithfulness=1.0 (openai/gpt-oss-20b)
+  fallback cell: row 42 answer_relevancy=0.7802183059535382 (openai/gpt-oss-20b)
+  fallback cell: row 42 context_precision=0.9999999999 (openai/gpt-oss-20b)
+  fallback cell: row 42 context_recall=1.0 (openai/gpt-oss-20b)
+  fallback cell: row 43 faithfulness=1.0 (openai/gpt-oss-20b)
+  fallback cell: row 43 answer_relevancy=0.8738686742164687 (openai/gpt-oss-20b)
+  fallback cell: row 43 context_precision=0.49999999995 (openai/gpt-oss-20b)
+  fallback cell: row 43 context_recall=1.0 (openai/gpt-oss-20b)
+  fallback cell: row 44 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 44 answer_relevancy=0.6699847887251398 (openai/gpt-oss-120b)
+  fallback cell: row 44 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 44 context_recall=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 45 faithfulness=0.6666666666666666 (openai/gpt-oss-120b)
+  fallback cell: row 45 answer_relevancy=0.7634181879196706 (openai/gpt-oss-120b)
+  fallback cell: row 45 context_precision=0.9999999999 (openai/gpt-oss-120b)
+  fallback cell: row 45 context_recall=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 46 faithfulness=0.5 (openai/gpt-oss-120b)
+  fallback cell: row 46 answer_relevancy=0.8708886473061729 (openai/gpt-oss-120b)
+  fallback cell: row 46 context_precision=0.9999999999666667 (openai/gpt-oss-120b)
+  fallback cell: row 46 context_recall=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 47 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 47 answer_relevancy=0.45325672350523893 (openai/gpt-oss-120b)
+  fallback cell: row 47 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 47 context_recall=0.75 (openai/gpt-oss-120b)
+  fallback cell: row 48 faithfulness=1.0 (openai/gpt-oss-120b)
+  fallback cell: row 48 answer_relevancy=0.7429558574914978 (openai/gpt-oss-120b)
+  fallback cell: row 48 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 48 context_recall=0.0 (openai/gpt-oss-120b)
+  fallback cell: row 49 faithfulness=0.3333333333333333 (openai/gpt-oss-120b)
+  fallback cell: row 49 answer_relevancy=0.7914751503603913 (openai/gpt-oss-120b)
+  fallback cell: row 49 context_precision=0.99999999995 (openai/gpt-oss-120b)
+  fallback cell: row 49 context_recall=0.75 (openai/gpt-oss-120b)
+Phase A saved to artifacts/.

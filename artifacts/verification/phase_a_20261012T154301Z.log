@@ -1,0 +1,182 @@
+  primary qwen/qwen3.8-27b: checkpoint only (RAGAS_SKIP_PRIMARY)
+/mnt/e/AIVin/K4-Track-3B-Day24-DinhHoangDuc-2A202602795-Eval-Guard/src/m4_eval.py:367: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the langchain-huggingface package and should be used instead. To use it run `pip install -U langchain-huggingface` and import as `from langchain_huggingface import HuggingFaceEmbeddings`.
+  _EMBEDDINGS = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 6619.89it/s]
+  evaluator openai/gpt-oss-120b via groq (workers=1)
+  RAGAS fallback openai/gpt-oss-120b: 30 rows to evaluate (2 already measured/cached)
+
+Evaluating:   0%|          | 0/1 [00:00<?, ?it/s]
+Evaluating: 100%|██████████| 1/1 [00:01<00:00,  1.98s/it]
+Evaluating: 100%|██████████| 1/1 [00:01<00:00,  1.98s/it]
+  checkpoint: 3/32 rows complete
+
+Evaluating:   0%|          | 0/1 [00:00<?, ?it/s]
+Evaluating: 100%|██████████| 1/1 [00:01<00:00,  1.89s/it]
+Evaluating: 100%|██████████| 1/1 [00:01<00:00,  1.89s/it]
+  checkpoint: 4/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:02<00:08,  2.89s/it]
+Evaluating:  50%|█████     | 2/4 [00:04<00:04,  2.00s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:11<00:04,  4.17s/it]
+Evaluating: 100%|██████████| 4/4 [00:27<00:00,  9.11s/it]
+Evaluating: 100%|██████████| 4/4 [00:27<00:00,  6.93s/it]
+  checkpoint: 5/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:07<00:23,  7.95s/it]
+Evaluating:  50%|█████     | 2/4 [00:20<00:21, 10.87s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:36<00:13, 13.07s/it]
+Evaluating: 100%|██████████| 4/4 [01:03<00:00, 18.64s/it]
+Evaluating: 100%|██████████| 4/4 [01:03<00:00, 15.93s/it]
+  checkpoint: 6/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:04<00:13,  4.42s/it]
+Evaluating:  50%|█████     | 2/4 [00:38<00:44, 22.15s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:41<00:13, 13.02s/it]
+Evaluating: 100%|██████████| 4/4 [00:53<00:00, 12.74s/it]
+Evaluating: 100%|██████████| 4/4 [00:53<00:00, 13.36s/it]
+  checkpoint: 7/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:13<00:40, 13.67s/it]
+Evaluating:  50%|█████     | 2/4 [00:27<00:27, 13.92s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:31<00:09,  9.04s/it]
+Evaluating: 100%|██████████| 4/4 [00:59<00:00, 16.59s/it]
+Evaluating: 100%|██████████| 4/4 [00:59<00:00, 14.79s/it]
+  checkpoint: 8/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:03<00:10,  3.50s/it]
+Evaluating:  50%|█████     | 2/4 [00:14<00:16,  8.20s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:35<00:13, 13.76s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 18.21s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 15.10s/it]
+  checkpoint: 9/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:10<00:30, 10.06s/it]
+Evaluating:  50%|█████     | 2/4 [00:26<00:27, 13.65s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:55<00:20, 20.82s/it]
+Evaluating: 100%|██████████| 4/4 [01:01<00:00, 14.98s/it]
+Evaluating: 100%|██████████| 4/4 [01:01<00:00, 15.40s/it]
+  checkpoint: 10/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:02<00:06,  2.09s/it]
+Evaluating:  50%|█████     | 2/4 [00:23<00:26, 13.22s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:41<00:15, 15.50s/it]
+Evaluating: 100%|██████████| 4/4 [01:09<00:00, 20.40s/it]
+Evaluating: 100%|██████████| 4/4 [01:09<00:00, 17.31s/it]
+  checkpoint: 11/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:31<01:33, 31.19s/it]
+Evaluating:  50%|█████     | 2/4 [00:44<00:41, 20.78s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:59<00:17, 17.92s/it]
+Evaluating: 100%|██████████| 4/4 [01:24<00:00, 20.87s/it]
+Evaluating: 100%|██████████| 4/4 [01:24<00:00, 21.15s/it]
+  checkpoint: 12/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:01<00:05,  1.95s/it]
+Evaluating:  50%|█████     | 2/4 [00:16<00:18,  9.46s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:39<00:15, 15.35s/it]
+Evaluating: 100%|██████████| 4/4 [00:59<00:00, 17.30s/it]
+Evaluating: 100%|██████████| 4/4 [00:59<00:00, 14.83s/it]
+  checkpoint: 13/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:36<01:49, 36.53s/it]
+Evaluating:  50%|█████     | 2/4 [00:46<00:41, 20.73s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:58<00:17, 17.07s/it]
+Evaluating: 100%|██████████| 4/4 [01:28<00:00, 21.88s/it]
+Evaluating: 100%|██████████| 4/4 [01:28<00:00, 22.04s/it]
+  checkpoint: 14/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:22<01:07, 22.48s/it]
+Evaluating:  50%|█████     | 2/4 [00:34<00:33, 16.53s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:38<00:10, 10.64s/it]
+Evaluating: 100%|██████████| 4/4 [00:50<00:00, 11.22s/it]
+Evaluating: 100%|██████████| 4/4 [00:50<00:00, 12.64s/it]
+  checkpoint: 15/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:07<00:21,  7.07s/it]
+Evaluating:  50%|█████     | 2/4 [00:21<00:22, 11.11s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:30<00:10, 10.49s/it]
+Evaluating: 100%|██████████| 4/4 [00:57<00:00, 16.99s/it]
+Evaluating: 100%|██████████| 4/4 [00:57<00:00, 14.43s/it]
+  checkpoint: 16/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:10<00:31, 10.56s/it]
+Evaluating:  50%|█████     | 2/4 [00:18<00:18,  9.14s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:19<00:05,  5.54s/it]
+Evaluating: 100%|██████████| 4/4 [00:42<00:00, 12.44s/it]
+Evaluating: 100%|██████████| 4/4 [00:42<00:00, 10.74s/it]
+  checkpoint: 17/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:01<00:04,  1.63s/it]
+Evaluating:  50%|█████     | 2/4 [00:12<00:14,  7.32s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:43<00:18, 18.07s/it]
+Evaluating: 100%|██████████| 4/4 [01:01<00:00, 17.97s/it]
+Evaluating: 100%|██████████| 4/4 [01:01<00:00, 15.41s/it]
+  checkpoint: 18/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:01<00:05,  1.87s/it]
+Evaluating:  50%|█████     | 2/4 [00:18<00:21, 10.62s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:39<00:15, 15.50s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 17.53s/it]
+Evaluating: 100%|██████████| 4/4 [01:00<00:00, 15.14s/it]
+  checkpoint: 19/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:08<00:24,  8.01s/it]
+Evaluating:  50%|█████     | 2/4 [00:33<00:36, 18.11s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:37<00:11, 11.83s/it]
+Evaluating: 100%|██████████| 4/4 [00:54<00:00, 13.69s/it]
+Evaluating: 100%|██████████| 4/4 [00:54<00:00, 13.52s/it]
+  checkpoint: 20/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:21<01:05, 21.71s/it]
+Evaluating:  50%|█████     | 2/4 [00:31<00:29, 14.60s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:49<00:16, 16.40s/it]
+Evaluating: 100%|██████████| 4/4 [01:01<00:00, 14.52s/it]
+Evaluating: 100%|██████████| 4/4 [01:01<00:00, 15.38s/it]
+  checkpoint: 21/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:01<00:04,  1.65s/it]
+Evaluating:  50%|█████     | 2/4 [00:45<00:53, 26.56s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:58<00:20, 20.19s/it]
+Evaluating: 100%|██████████| 4/4 [01:14<00:00, 18.65s/it]
+Evaluating: 100%|██████████| 4/4 [01:14<00:00, 18.64s/it]
+  checkpoint: 22/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:03<00:11,  3.88s/it]
+Evaluating:  50%|█████     | 2/4 [00:16<00:18,  9.26s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:45<00:18, 18.17s/it]
+Evaluating: 100%|██████████| 4/4 [00:48<00:00, 11.94s/it]
+Evaluating: 100%|██████████| 4/4 [00:48<00:00, 12.02s/it]
+  checkpoint: 23/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:09<00:29,  9.81s/it]
+Evaluating:  50%|█████     | 2/4 [00:25<00:26, 13.08s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:26<00:07,  7.57s/it]
+Evaluating: 100%|██████████| 4/4 [00:41<00:00, 10.64s/it]
+Evaluating: 100%|██████████| 4/4 [00:41<00:00, 10.39s/it]
+  checkpoint: 24/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:01<00:04,  1.54s/it]
+Evaluating:  50%|█████     | 2/4 [01:01<01:11, 35.74s/it]

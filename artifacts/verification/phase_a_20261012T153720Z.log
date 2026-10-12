@@ -1,0 +1,39 @@
+  primary qwen/qwen3.8-27b: checkpoint only (RAGAS_SKIP_PRIMARY)
+/mnt/e/AIVin/K4-Track-3B-Day24-DinhHoangDuc-2A202602795-Eval-Guard/src/m4_eval.py:342: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the langchain-huggingface package and should be used instead. To use it run `pip install -U langchain-huggingface` and import as `from langchain_huggingface import HuggingFaceEmbeddings`.
+  _EMBEDDINGS = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 9807.92it/s]
+  evaluator openai/gpt-oss-120b via groq (workers=1)
+  RAGAS fallback openai/gpt-oss-120b: 32 rows to evaluate (0 already measured/cached)
+
+Evaluating:   0%|          | 0/1 [00:00<?, ?it/s]No statements were generated from the answer.
+
+Evaluating: 100%|██████████| 1/1 [00:01<00:00,  1.84s/it]
+Evaluating: 100%|██████████| 1/1 [00:01<00:00,  1.84s/it]
+  checkpoint: 0/32 rows complete
+
+Evaluating:   0%|          | 0/1 [00:00<?, ?it/s]No statements were generated from the answer.
+
+Evaluating: 100%|██████████| 1/1 [00:02<00:00,  2.74s/it]
+Evaluating: 100%|██████████| 1/1 [00:02<00:00,  2.74s/it]
+  checkpoint: 0/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:07<00:21,  7.17s/it]
+Evaluating:  50%|█████     | 2/4 [00:31<00:34, 17.11s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:43<00:14, 14.91s/it]
+Evaluating: 100%|██████████| 4/4 [00:56<00:00, 14.34s/it]
+Evaluating: 100%|██████████| 4/4 [00:56<00:00, 14.25s/it]
+  checkpoint: 1/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:05<00:17,  5.96s/it]
+Evaluating:  50%|█████     | 2/4 [00:29<00:32, 16.36s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:39<00:13, 13.41s/it]
+Evaluating: 100%|██████████| 4/4 [01:12<00:00, 21.14s/it]
+Evaluating: 100%|██████████| 4/4 [01:12<00:00, 18.12s/it]
+  checkpoint: 2/32 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:22<01:07, 22.48s/it]

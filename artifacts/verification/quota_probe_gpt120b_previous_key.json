@@ -1,0 +1,6 @@
+{
+  "probe": "RAGAS statement extraction prompt for question 43; not a completed metric",
+  "model": "openai/gpt-oss-120b",
+  "status": "RateLimitError",
+  "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m4qs8cr2ernv1mw9nmd70wxf` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198341, Requested 1835. Please try again in 1m16.032s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+}

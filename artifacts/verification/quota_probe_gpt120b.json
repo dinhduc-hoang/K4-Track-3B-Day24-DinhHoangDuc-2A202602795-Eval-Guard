@@ -1,0 +1,21 @@
+{
+  "probe": "RAGAS statement extraction prompt for question 43; not a completed metric",
+  "model": "openai/gpt-oss-120b",
+  "status": "OK",
+  "usage": {
+    "completion_tokens": 97,
+    "prompt_tokens": 675,
+    "total_tokens": 772,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 49,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": null,
+    "queue_time": 0.212712634,
+    "prompt_time": 0.032034895,
+    "completion_time": 0.202337165,
+    "total_time": 0.23437206
+  }
+}

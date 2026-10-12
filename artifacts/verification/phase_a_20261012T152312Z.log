@@ -1,0 +1,14 @@
+/mnt/e/AIVin/K4-Track-3B-Day24-DinhHoangDuc-2A202602795-Eval-Guard/src/m4_eval.py:335: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the langchain-huggingface package and should be used instead. To use it run `pip install -U langchain-huggingface` and import as `from langchain_huggingface import HuggingFaceEmbeddings`.
+  _EMBEDDINGS = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 9855.90it/s]
+  evaluator qwen/qwen3.8-27b via groq (workers=1)
+  RAGAS: 32 rows to evaluate (18 already measured/cached)
+
+Evaluating:   0%|          | 0/20 [00:00<?, ?it/s]
+Evaluating:   5%|▌         | 1/20 [00:02<00:50,  2.67s/it]
+Evaluating:  10%|█         | 2/20 [00:04<00:43,  2.42s/it]Exception raised in Job[15]: TimeoutError()
+
+Evaluating:  15%|█▌        | 3/20 [05:30<42:31, 150.08s/it]

@@ -5,6 +5,8 @@ Nhóm: DinhHoangDuc (nhóm một người)
 Người phụ trách: Đinh Hoàng Đức — 2A202602795
 
 Nguồn: `artifacts/judge_results.json`; run timestamp: 2026-10-12T10:20:32.614556+00:00.
+Đối chiếu offline: `artifacts/evidence_audit.json`, tạo bằng `python scripts/audit_evidence.py`;
+schema, hash nguồn, nhãn và phép tính κ/bias đều được kiểm tra từ JSON đã lưu.
 Models generation/judge: generation = `openai/gpt-oss-20b`; judge = `openai/gpt-oss-20b`
 (cả hai gọi qua Groq API tương thích OpenAI; pairwise ở `src/phase_b_judge.py`, nhãn 0/1 qua
 helper `judge_binary`, cùng `config.JUDGE_MODEL`). Judge và generation dùng chung một model ID —
@@ -62,7 +64,7 @@ Không gửi human_label, human_note hoặc phân bố nhãn human vào prompt.
 Runner (`src/experiment_runners.py::run_phase_b`) gọi `judge_binary` cho đủ 10 bản ghi trước,
 sau đó mới đọc `human_label` để ghép theo `question_id`.
 
-| question_id | model_answer gốc | judge | reasoning (tóm tắt) | human | agree |
+| question_id | model_answer (tóm tắt; nguyên văn trong fixture/JSON) | judge | reasoning (tóm tắt) | human | agree |
 |---|---|---|---|---|---|
 | 1 | Nghỉ 3 ngày làm việc có lương khi kết hôn. | 1 | Đúng 3 ngày có lương như reference | 1 | yes |
 | 5 | Cần Giám đốc phòng ban phê duyệt. | 0 | Sai cấp phê duyệt, reference là Tổng Giám đốc | 0 | yes |
@@ -78,7 +80,7 @@ sau đó mới đọc `human_label` để ghép theo `question_id`.
 Cohen’s κ: 1.0.
 Observed/chance agreement và diễn giải: p_o = 10/10 = 1.0. Judge và human cùng có 6 nhãn 1 và
 4 nhãn 0, nên p_e = 0.6 × 0.6 + 0.4 × 0.4 = 0.52. κ = (1.0 − 0.52) / (1 − 0.52) = 1.0
-(“almost perfect” theo Landis–Koch), vượt ngưỡng bonus κ > 0.6. Kết quả trùng với giá trị
+(đồng thuận hoàn toàn trong mẫu), vượt ngưỡng bonus κ > 0.6. Kết quả trùng với giá trị
 `binary_kappa` mà checker tính lại từ hai list nhãn.
 
 ## Giới hạn và cách dùng judge

@@ -1,0 +1,134 @@
+{
+  "checked_at": "2026-10-12T16:28:12.865508+00:00",
+  "scope": "Offline validation and recomputation of saved live artifacts; no new live measurements.",
+  "answers": {
+    "count": 50,
+    "llm_count": 50
+  },
+  "a": {
+    "status": "validated",
+    "source": "artifacts/ragas_50q.json",
+    "live_created_at": "2026-10-12T16:27:12.813983+00:00",
+    "recomputed": {
+      "faithfulness": 0.7173968253968254,
+      "answer_relevancy": 0.780242871226913,
+      "context_precision": 0.8483333332649167,
+      "context_recall": 0.675,
+      "avg_score": 0.7552432574721638,
+      "per_distribution": {
+        "factual": {
+          "count": 20,
+          "faithfulness": 0.9208333333333334,
+          "answer_relevancy": 0.8957742170084281,
+          "context_precision": 0.891666666585,
+          "context_recall": 0.6833333333333333,
+          "avg_score": 0.8479018875650237
+        },
+        "multi_hop": {
+          "count": 20,
+          "faithfulness": 0.44765873015873014,
+          "answer_relevancy": 0.6869370878186457,
+          "context_precision": 0.7541666666114584,
+          "context_recall": 0.6458333333333333,
+          "avg_score": 0.6336489544805419
+        },
+        "adversarial": {
+          "count": 10,
+          "faithfulness": 0.85,
+          "answer_relevancy": 0.7357917464804179,
+          "context_precision": 0.9499999999316667,
+          "context_recall": 0.7166666666666667,
+          "avg_score": 0.8131146032696878
+        }
+      },
+      "bottom_ids": [
+        5,
+        39,
+        40,
+        33,
+        23,
+        21,
+        26,
+        27,
+        35,
+        31
+      ],
+      "fallback_cells_by_model": {
+        "openai/gpt-oss-120b": 114,
+        "openai/gpt-oss-20b": 8
+      },
+      "fallback_faithfulness_protocols": {
+        "ragas_0.1.22_retain_fragments_v1": 30,
+        "ragas_0.1.22_default": 2
+      }
+    }
+  },
+  "b": {
+    "status": "validated",
+    "source": "artifacts/judge_results.json",
+    "live_created_at": "2026-10-12T10:20:32.614556+00:00",
+    "recomputed": {
+      "cohen_kappa": 1.0,
+      "agreement_count": 10,
+      "label_count": 10,
+      "bias": {
+        "total_judged": 5,
+        "position_bias_rate": 0.2,
+        "position_bias_count": 1,
+        "verbosity_bias": 0.5,
+        "verbosity_details": {
+          "a_wins_a_longer": 1,
+          "b_wins_b_longer": 0,
+          "total_decisive": 2
+        },
+        "interpretation": "1/5 cặp không nhất quán khi hoán vị — có dấu hiệu position bias, đọc reasoning hai lượt trước khi kết luận. Answer dài hơn thắng 1/2 case decisive. Mẫu chỉ 5 cặp nên đây là dấu hiệu, không phải bằng chứng thống kê về nguyên nhân."
+      }
+    }
+  },
+  "c": {
+    "status": "validated",
+    "source": "artifacts/guard_results.json",
+    "live_created_at": "2026-10-12T10:17:59.656219+00:00",
+    "recomputed": {
+      "attacks_passed": 17,
+      "clean_allowed": 8,
+      "output_passed": 4,
+      "missed_attack_ids": [
+        11,
+        14,
+        15
+      ],
+      "input_guard_p95_ms": 5003.771875,
+      "latency_scope": "input_layers_sequential",
+      "samples": 20
+    }
+  },
+  "previous_guard": {
+    "source": "artifacts/previous_runs/guard_results_run1_presidio_ner.json",
+    "attacks_passed": 20,
+    "clean_blocked": 7,
+    "false_positive_rate": 0.875,
+    "nemo_input_ms": {
+      "p50": 536.934022,
+      "p95": 788.053152,
+      "p99": 847.360189
+    },
+    "input_guard_ms": {
+      "p50": 542.619543,
+      "p95": 793.123619,
+      "p99": 852.452966
+    }
+  },
+  "source_sha256": {
+    "artifacts/answers_50q.json": "7273e7a5fe96019b8a03769b3ec0fb218797f35f294c6f900bc0c5ff1fee6c06",
+    "fixtures/test_set_50q.json": "0e87f26e020a32c62ea0864940720618f39600b9d3378193704cf2f86e88446d",
+    "artifacts/ragas_50q.json": "f44cf55a134aef5051dd03f14b7f9879388fcdabfd70c475180d9fbf2b202272",
+    "artifacts/judge_results.json": "94c77feae98c45bc361b741a32de5a0450ac81b73b1f53474498ca5d48201198",
+    "fixtures/human_labels_10q.json": "e72338bd99c3d0165348c11997735bbb87c978fe018c24dfd29c9801d5c2b2c1",
+    "artifacts/guard_results.json": "d6110956ee5949c2330b3e07a50fc61c015a0a984e6061bfb9eedc6d9fe87fa7",
+    "fixtures/adversarial_set_20.json": "6cb482968ec78947e90844ad7a40ac67f39274d0939507ca661fe42462943575",
+    "fixtures/clean_set_8.json": "d6cf840357436a5f327784bbf91c42b82013315e2661f2456bb223b29a101f10",
+    "fixtures/output_set_4.json": "036a07775b69e6eb4d903039994b3d163f649b47ffed81e670a4b37ba60837f0",
+    "artifacts/previous_runs/guard_results_run1_presidio_ner.json": "20bf2772686ad09370a2ed76d7aad4565667aec2f838fcc4b72e703b2e361d70"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "started_at": "20261012T161340Z",
+  "finished_at": "2026-10-12T16:18:50.997292+00:00",
+  "command": "python scripts/run_experiments.py --phase a --live",
+  "provider": "groq",
+  "endpoint": "https://api.groq.com/openai/v1",
+  "primary_checkpoint_only": true,
+  "batch_size": 1,
+  "checkpoint_only_models": "qwen/qwen3.8-27b,openai/gpt-oss-120b",
+  "additional_fallback_models": "openai/gpt-oss-20b",
+  "exit_code": -15,
+  "log": "phase_a_20261012T161340Z.log"
+}

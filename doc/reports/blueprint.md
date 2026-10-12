@@ -6,12 +6,16 @@ Người phụ trách: Đinh Hoàng Đức — 2A202602795
 
 Đây là **đề xuất CI/CD**, không phải workflow đã được triển khai/chạy.
 Nguồn kết quả: artifacts/ragas_50q.json, judge_results.json, guard_results.json.
+Đối chiếu offline: `python scripts/audit_evidence.py` lưu phép tính và SHA-256 nguồn
+trong `artifacts/evidence_audit.json`. Đây là kiểm tra artifact đã lưu, không phải lần đo API mới.
 Run timestamp: Phase C 2026-10-12T10:17:59.656219+00:00; guard models: `openai/gpt-oss-20b`
 (engine `openai_chat` của NeMo 0.10, gọi Groq).
-Models generation/evaluator/judge từ A/B (Phase A chưa có artifact): generation `openai/gpt-oss-20b` (answers_50q.json, mode llm);
-evaluator `qwen/qwen3.8-27b` + `BAAI/bge-m3` dự kiến — **Phase A chưa chạy xong**, chưa có
-`ragas_50q.json` (18/50 câu đã chấm, dừng vì hết quota 200K token/ngày/model của Groq free; xem TEAM.md);
-judge `openai/gpt-oss-20b` (judge_results.json, run 2026-10-12T10:20:32.614556+00:00).
+Models generation/evaluator/judge từ A/B: generation `openai/gpt-oss-20b` (50 answers LLM);
+evaluator `BAAI/bge-m3`, `openai/gpt-oss-120b`, `openai/gpt-oss-20b`, `qwen/qwen3.8-27b`; Phase A đã đủ 50 câu, timestamp xuất artifact
+2026-10-12T16:27:12.813983+00:00. Giữ điểm checkpoint Qwen; các ô bổ sung: openai/gpt-oss-120b: 114 ô, openai/gpt-oss-20b: 8 ô.
+Đánh giá kết hợp model và hai protocol faithfulness (mặc định / giữ cụm từ không có dấu chấm);
+không coi chênh lệch distribution là phép so sánh được kiểm soát bằng một evaluator.
+Judge `openai/gpt-oss-20b` (judge_results.json, run 2026-10-12T10:20:32.614556+00:00).
 
 ## Kiến trúc và failure action
 
@@ -92,8 +96,8 @@ Trạng thái hiện tại so với các gate đề xuất (từ artifacts):
 
 | Gate đề xuất | Số đo hiện tại | Đạt |
 |---|---|---|
-| RAGAS faithfulness ≥ 0.75 (mean 50 câu) | chưa có (Phase A chưa chạy xong) | chưa đánh giá |
-| RAGAS avg_score ≥ 0.65 (mean 50 câu) | chưa có (Phase A chưa chạy xong) | chưa đánh giá |
+| RAGAS faithfulness ≥ 0.75 (mean 50 câu) | 0.7174 | Không |
+| RAGAS avg_score ≥ 0.65 (mean 50 câu) | 0.7552 | Có |
 | Attacks ≥ 18/20 | 17/20 | Không (đạt mốc bắt buộc 15/20) |
 | Clean 8/8 allowed | 8/8, false_positive_rate 0.0 | Có |
 | Output cases đúng | 4/4 | Có |
@@ -122,11 +126,11 @@ Job đề xuất (chưa triển khai, chưa có file workflow trong repo):
 - Privacy: không lưu input thô có PII; mẫu dùng để monitoring phải đi qua Presidio anonymize trước.
 - Người xử lý: chủ repo (nhóm một người) xử lý cảnh báo; false positive được thêm vào bộ clean canary.
 
-RAGAS mean/worst distribution: chưa có — Phase A chưa chạy xong (không dùng 18 câu đã chấm làm số đại diện).
+RAGAS avg_score toàn bộ: 0.7552; nhóm yếu nhất: multi_hop (0.6336).
 Cohen’s κ: 1.0 (10/10 nhãn trùng human).
 Attacks passed: 17/20; clean false_positive_rate: 0.0.
 
-Giới hạn: bộ 50/20/8/4 nhỏ, một model cho mọi vai trò, quota Groq free ảnh hưởng latency; các con số
+Giới hạn: bộ 50/20/8/4 nhỏ, generation/judge/guard dùng chung model; evaluator kết hợp ba LLM, quota Groq free ảnh hưởng latency; các con số
 là bằng chứng của một lần chạy, không phải phân phối ổn định.
 
 Cải tiến có thể kiểm tra, gắn với bằng chứng:
@@ -136,9 +140,10 @@ Cải tiến có thể kiểm tra, gắn với bằng chứng:
    câu sạch — chỉ chấp nhận khi clean vẫn 8/8.
 2. Latency: thử model guard không suy luận hoặc classifier cục bộ; gate = input guard P95 < 500ms
    trên ≥ 50 mẫu không bị throttle.
-3. Quota eval: Phase A cần ~10K token/câu với RAGAS 0.1.22 (4 metric, few-shot prompts); một batch
-   50 câu vượt quota 200K token/ngày/model của Groq free. Job eval định kỳ phải chạy trên provider
-   trả phí hoặc chia theo ngày, có checkpoint (đã có trong `src/m4_eval.py`) và gate kiểm tra đủ
+3. Quota eval: lần chạy Phase A trước bị dừng bởi giới hạn token/ngày của Groq.
+   Repo chưa lưu tổng token usage cho batch nên không báo cáo token/câu hoặc chi phí ước tính.
+   Job eval định kỳ cần quota đủ hoặc chia theo ngày, có checkpoint
+   (đã có trong `src/m4_eval.py`) và gate kiểm tra đủ
    50 dòng hữu hạn trước khi xuất report.
 4. Presidio: thêm recognizer cho tên người tiếng Việt bằng NER tiếng Việt thay vì NER tiếng Anh, đo lại
    false-positive trên clean set trước khi bật.

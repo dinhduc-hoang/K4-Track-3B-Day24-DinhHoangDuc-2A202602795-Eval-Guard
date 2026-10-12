@@ -1,5 +1,19 @@
 # K4 Track 3B — Production Eval + Guardrail Stack
 
+## Bài làm hiện tại
+
+Đã có đủ answers và kết quả thực nghiệm A/B/C trong `artifacts/`.
+Phase A: 50 câu, bốn metric; avg_score 0.7552, nhóm yếu nhất multi_hop.
+Phase B: κ = 1.0 trên 10 nhãn.
+Phase C: 17/20 attacks, 8/8 clean,
+4/4 output; input guard P95
+5003.77 ms, vượt mục tiêu 500 ms.
+Điểm Phase A kết hợp evaluator do quota; giới hạn và nguồn từng số nằm trong
+[báo cáo](doc/reports/failure_clusters.md), [blueprint](doc/reports/blueprint.md)
+và [TEAM](doc/TEAM.md). Blueprint là đề xuất CI/CD.
+Kiểm tra offline: `python scripts/check_lab.py --with-tests`;
+đối chiếu số liệu/hash: `python scripts/audit_evidence.py`.
+
 **Bài nhóm: mỗi nhóm dùng và nộp một repo chung của trưởng nhóm.**
 Mỗi người khai phần thực tế đã làm trong [doc/TEAM.md](doc/TEAM.md).
 
@@ -30,7 +44,7 @@ Nhóm đánh giá đầu ra pipeline RAG, kiểm tra độ tin cậy của LLM J
 cho input/output. Starter có các hàm TODO để học viên làm; runner, xuất JSON,
 thống kê percentile và checker là phần hỗ trợ đã cung cấp.
 
-**Trạng thái khi tải về:** chưa có bài làm, thông tin nhóm hay kết quả thực
+**Trạng thái starter upstream khi tải về:** chưa có bài làm, thông tin nhóm hay kết quả thực
 nghiệm. Các hàm bài tập còn TODO; `doc/TEAM.md` và ba báo cáo là mẫu chưa điền;
 `artifacts/` chỉ có `.gitkeep`. Nhóm tự tạo `artifacts/answers_50q.json` và ba JSON kết quả
 sau khi chuẩn bị và hoàn thành bài. Các file `fixtures/test_set_50q.json`,

@@ -1,0 +1,120 @@
+{
+ "d1a73ef48247d0a575ac56c2cef803b8356483ab823474cef594589a2b7291ce": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9910465608182875,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "c23acd3c2c38b09daebc3d86d836ffa9cf4d5a1e2e47aac79e2ebe8712a44924": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9057163659717649,
+  "context_precision": 0.3333333333,
+  "context_recall": 1.0
+ },
+ "c519f72431a93a7e9616d0b36160cc2822fd64f374ce420d3364a9a55c63d068": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9360494278743605,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "8a0d061e5a9ef208eca8025c0c6c06e43175ac6c4847b6ada6f96d47ca5ff51c": {
+  "faithfulness": 0.6666666666666666,
+  "answer_relevancy": 0.838020023546491,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "4fe4ab3b53e2a1815fb01297124906a3fe9094a00d5ba0fc994f8819f43c8a9d": {
+  "faithfulness": 0.0,
+  "answer_relevancy": 0.6892827121425701,
+  "context_precision": 0.0,
+  "context_recall": 0.0
+ },
+ "5bb7b035ec84018c5724538bb1927a2db9c8f92e20403012ae9ac3015baceada": {
+  "answer_relevancy": 0.9467199725006671,
+  "context_precision": 0.9999999999,
+  "context_recall": 0.0
+ },
+ "0243d75a3c02ead159bad4e91625848acfd6d56cdf67dc0203383e7fb262dd78": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8545693472104303,
+  "context_precision": 0.49999999995,
+  "context_recall": 0.5
+ },
+ "a4e5699f92d20183c12e565124981f27db19c51ce5ff939829f8481cdc7e3eca": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.7995959135447378,
+  "context_precision": 0.9999999999,
+  "context_recall": 0.5
+ },
+ "9d8d62906eae043dfce77ca8012cb9c4d55eee7875208bf367d9f3ebbc2b8c84": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9719748258449252,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "572fb1545de8b875f95094229b8cdb616de091aa982594b1d664eab5256019e2": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9982129683695319,
+  "context_precision": 0.9999999999,
+  "context_recall": 0.5
+ },
+ "0d2bfff9b00232faf6d2ff36975c720964ff874f7595a357515f59339b367b28": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9221656103575163,
+  "context_precision": 0.99999999995,
+  "context_recall": 0.0
+ },
+ "1089aa2291c66ab0d650dfffd664caf69fa8ec1b034b9a7b9c238746297808ad": {
+  "answer_relevancy": 0.9789055112155262,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "406093a26a25ea5424d22380df8379fbdd3c2d4933f5a17323ba91027cce3eed": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9809303607381293,
+  "context_precision": 0.9999999999,
+  "context_recall": 0.0
+ },
+ "e720a78e92bd145880626d3f4926a877806d9610f12273e54272a8d29eabfa42": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9142015575331794,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "4f11fb66e5ab362889eacb7eb3ac632310888ade707cbaac40def38d466afae6": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.7353033739320692,
+  "context_precision": 0.99999999995,
+  "context_recall": 1.0
+ },
+ "0c8fc3af18a59e9e6120804ed908d20b862e13d7cab93877d67f81772f2ea08e": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9846567312212252,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ },
+ "2f9df5b926b3c9ec15d57fcc6e4dedec0e788a7feae2089b9120451c74d265d3": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.9305798058159088,
+  "context_precision": 0.9999999999,
+  "context_recall": 0.6666666666666666
+ },
+ "6f24fe63fa3e737943d8157c26dac2651f99ce101b59fcffa68694fabc8c54b3": {
+  "faithfulness": 0.75,
+  "answer_relevancy": 0.7938202313300391,
+  "context_precision": 0.9999999999,
+  "context_recall": 0.5
+ },
+ "e9e8f5f77428d39fb238797f0502af417aa22ecdf317d7a1b2ee43821636e6f8": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8698118485341237,
+  "context_precision": 0.99999999995,
+  "context_recall": 1.0
+ },
+ "c6c9bcf014ba9ae9c66095908f2de00c4aa9143ecbf2636192112dc6784f0c03": {
+  "faithfulness": 1.0,
+  "answer_relevancy": 0.8739211916670778,
+  "context_precision": 0.9999999999,
+  "context_recall": 1.0
+ }
+}

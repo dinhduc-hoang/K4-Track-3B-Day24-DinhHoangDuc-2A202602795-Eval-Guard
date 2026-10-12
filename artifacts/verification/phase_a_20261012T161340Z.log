@@ -1,0 +1,30 @@
+  primary qwen/qwen3.8-27b: checkpoint only (RAGAS_SKIP_PRIMARY)
+  fallback openai/gpt-oss-120b: checkpoint only
+/mnt/e/AIVin/K4-Track-3B-Day24-DinhHoangDuc-2A202602795-Eval-Guard/src/m4_eval.py:378: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the langchain-huggingface package and should be used instead. To use it run `pip install -U langchain-huggingface` and import as `from langchain_huggingface import HuggingFaceEmbeddings`.
+  _EMBEDDINGS = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
+
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 391/391 [00:00<00:00, 9571.34it/s]
+  evaluator openai/gpt-oss-20b via groq (workers=1)
+  RAGAS fallback openai/gpt-oss-20b: 8 rows to evaluate (0 already measured/cached)
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:01<00:04,  1.53s/it]
+Evaluating:  50%|█████     | 2/4 [00:02<00:02,  1.19s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:04<00:01,  1.57s/it]
+Evaluating: 100%|██████████| 4/4 [00:11<00:00,  3.58s/it]
+Evaluating: 100%|██████████| 4/4 [00:11<00:00,  2.79s/it]
+  checkpoint: 1/8 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:03<00:11,  3.75s/it]
+Evaluating:  50%|█████     | 2/4 [00:16<00:17,  8.87s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:45<00:18, 18.36s/it]
+Evaluating: 100%|██████████| 4/4 [00:57<00:00, 15.86s/it]
+Evaluating: 100%|██████████| 4/4 [00:57<00:00, 14.47s/it]
+  checkpoint: 2/8 rows complete
+
+Evaluating:   0%|          | 0/4 [00:00<?, ?it/s]
+Evaluating:  25%|██▌       | 1/4 [00:26<01:20, 26.90s/it]
+Evaluating:  50%|█████     | 2/4 [00:35<00:31, 15.96s/it]
+Evaluating:  75%|███████▌  | 3/4 [00:48<00:14, 14.53s/it]

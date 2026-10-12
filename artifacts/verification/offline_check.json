@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-10-12T16:30:14.786748+00:00",
+  "python": "3.12.3",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "packages": {
+    "ragas": "0.1.22",
+    "nemoguardrails": "0.10.0",
+    "presidio-analyzer": "2.2.364",
+    "spacy": "3.8.16",
+    "pytest": "9.1.1"
+  },
+  "command": "python scripts/check_lab.py --with-tests",
+  "exit_code": 0,
+  "stdout": "........................................................................ [ 73%]\n..........................                                               [100%]\n98 passed, 3 deselected in 2.31s\nPASS README.md\nPASS doc/ASSIGNMENT.md\nPASS doc/SUBMISSION.md\nPASS doc/CHECKPOINTS.md\nPASS doc/RULES.md\nPASS doc/RUBRIC.md\nPASS doc/ENVIRONMENT.md\nPASS doc/PIPELINE_INTERFACE.md\nPASS doc/REPORT_SCHEMAS.md\nPASS doc/TEAM.md\nPASS doc/reports/failure_clusters.md\nPASS doc/reports/bias_report.md\nPASS doc/reports/blueprint.md\nPASS m1_chunking.py\nPASS m2_search.py\nPASS m3_rerank.py\nPASS m4_eval.py\nPASS m5_enrichment.py\nPASS phase_a_ragas.py\nPASS phase_b_judge.py\nPASS phase_c_guard.py\nPASS answers_50q.json\nPASS Phase A artifact\nPASS Phase B artifact\nPASS Phase C artifact\nPASS offline pytest\n0 failed checks (not a rubric score).\n",
+  "stderr": ""
+}
