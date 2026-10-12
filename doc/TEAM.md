@@ -8,7 +8,7 @@ Trưởng nhóm/người nộp: Đinh Hoàng Đức — 2A202602795
 
 Ngày lab/deadline áp dụng: lab 12/10/2026, deadline mặc định 11:59 ngày 13/10/2026 theo codelab — Asia/Ho_Chi_Minh (UTC+07:00)
 
-Commit dùng để chấm: bản đầy đủ artifacts A/B/C, báo cáo và log kiểm chứng; SHA được ghi ở bước đóng gói.
+Commit dùng để chấm: `911c719b137955c83c7dbf5c6e49ccd32cc899d5` — bản đầy đủ source, artifacts A/B/C, báo cáo và log kiểm chứng. Commit kế tiếp chỉ cập nhật dòng SHA này trong TEAM.
 
 Mỗi nhóm nộp một repo. Nhóm có một thành viên nên bảng dưới và mục INDIVIDUAL chỉ có một người.
 
