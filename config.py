@@ -5,6 +5,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# --- LLM provider: Groq (OpenAI-compatible API) ---
+# With GROQ_API_KEY set, every OpenAI SDK / LangChain / NeMo client in this repo is
+# routed to Groq through the standard env vars, so supplied scripts need no edits.
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_BASE_URL = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
+if GROQ_API_KEY:
+    os.environ["OPENAI_API_KEY"] = GROQ_API_KEY
+    os.environ["OPENAI_BASE_URL"] = GROQ_BASE_URL  # openai SDK
+    os.environ["OPENAI_API_BASE"] = GROQ_BASE_URL  # langchain-openai 0.1.x (RAGAS, NeMo)
+
 # --- API Keys ---
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 HF_TOKEN = os.getenv("HF_TOKEN", "")  # Optional: for HuggingFace models
@@ -45,8 +55,9 @@ GUARDRAILS_CONFIG_DIR = os.path.join(ROOT_DIR, "guardrails")
 PAIR_QUESTION_IDS = (1, 5, 12, 21, 41)
 
 # --- LLM Judge ---
-GENERATION_MODEL = "gpt-4o-mini"
-JUDGE_MODEL = "gpt-4o-mini"
+GENERATION_MODEL = os.getenv("GENERATION_MODEL", "openai/gpt-oss-20b")
+JUDGE_MODEL = os.getenv("JUDGE_MODEL", "openai/gpt-oss-20b")
+# NeMo guard model lives in guardrails/config.yml; RAGAS evaluator in src/m4_eval.py.
 
 # --- Guardrail latency budget ---
 LATENCY_BUDGET_P95_MS = 500  # Full guard target; Task 12 currently measures input guards only.

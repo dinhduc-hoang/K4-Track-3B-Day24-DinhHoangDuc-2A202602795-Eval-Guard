@@ -10,3 +10,7 @@ nemoguardrails==0.10.0
 openai==1.109.1
 annoy==1.17.3
 numpy==1.26.4
+# Team addition: newer pyarrow (>=18) / pandas 3 require NumPy 2 and made datasets,
+# sentence-transformers and RAGAS fail to import, silently forcing m2/m3 fallbacks.
+pyarrow>=15,<18
+pandas>=2.2,<3
